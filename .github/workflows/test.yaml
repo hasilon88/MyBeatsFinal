@@ -31,7 +31,7 @@ jobs:
           yt-dlp -f bestaudio -x --audio-format mp3 -o "/tmp/song/${TITLE}.%(ext)s" "$URL"
 
       - name: Upload MP3 as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mp3-song
           path: /tmp/song/*.mp3
