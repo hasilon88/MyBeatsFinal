@@ -1,11 +1,16 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
+from starlette.responses import RedirectResponse
 from src.services.youtube_music import match_spotify_to_youtube
 from src.services.youtube_downloader import download_youtube_mp3
 from src.services.metadata_modifier import modify_metadata
 from src.models.song import Song
 
 app = FastAPI()
+
+@app.get("/")
+async def root():
+    return RedirectResponse(url="/docs")
 
 @app.post("/api/download")
 async def process_spotify_track(track_data: dict):
