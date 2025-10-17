@@ -1,0 +1,37 @@
+name: Test YT-DLP Download
+
+on:
+  workflow_dispatch: # manual trigger
+
+jobs:
+  download-song:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install yt-dlp
+        run: |
+          python -m pip install --upgrade pip
+          pip install yt-dlp
+
+      - name: Create output folder
+        run: mkdir -p /tmp/song
+
+      - name: Download YouTube song
+        run: |
+          # Example YouTube URL
+          URL="https://www.youtube.com/watch?v=fvbWAchFEOk"
+          TITLE="Blinding_Lights"
+          yt-dlp -f bestaudio -x --audio-format mp3 -o "/tmp/song/${TITLE}.%(ext)s" "$URL"
+
+      - name: Upload MP3 as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mp3-song
+          path: /tmp/song/*.mp3
