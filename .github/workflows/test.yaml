@@ -26,7 +26,7 @@ jobs:
       - name: Download YouTube song
         run: |
           # Example YouTube URL
-          URL="https://www.youtube.com/watch?v=fvbWAchFEOk"
+          URL="https://www.youtube.com/watch?v=-lVzdxgVNeg&list=RD-lVzdxgVNeg&start_radio=1&pp=ygULc2F5aXJhIGdpcmygBwE%3D"
           TITLE="Blinding_Lights"
           yt-dlp -f bestaudio -x --audio-format mp3 -o "/tmp/song/${TITLE}.%(ext)s" "$URL"
 
